@@ -1,0 +1,197 @@
+####下拉刷新
+
+原生滚动实现的下拉刷新。
+
+为了使用下拉刷新，首先你需要在被下拉的容器的最顶部加上下拉状态的代码(这里我们在 document.body 上进行下拉刷新)：
+
+####特别强调：下拉刷新一定要在真正发生滚动的那个元素上初始化，如果你发现下拉刷新导致页面无法滚动，那么几乎可以肯定是你初始化的容易搞错了
+
+```
+<body>
+  <!-- body 顶部加上如下代码 -->
+  <div class="weui-pull-to-refresh__layer">
+    <div class='weui-pull-to-refresh__arrow'></div>
+    <div class='weui-pull-to-refresh__preloader'></div>
+    <div class="down">下拉刷新</div>
+    <div class="up">释放刷新</div>
+    <div class="refresh">正在刷新</div>
+  </div>
+
+  <!-- 其他内容 -->
+</body>
+```
+
+其中 down, up, refresh 分别是在下拉过程的不同状态下显示的。你可以随意修改其中的内容来定制自己的样式
+
+然后通过JS初始化下拉刷新：
+```
+$(document.body).pullToRefresh(function () {
+// 下拉刷新触发时执行的操作放这里。
+// 从 v1.1.2 版本才支持回调函数，之前的版本只能通过事件监听
+});
+```
+
+
+注意，从 v0.4.0 版本之后，你可以在任何 DIV 内初始化下拉刷新操作。并且同一个页面可以初始化多个下拉刷新。
+
+当下拉刷新的动作触发的时候，会在容器上触发一个 pull-to-refresh 事件.
+```
+$(document.body).on("pull-to-refresh", function() {
+  //do something
+});
+```
+完成下拉刷新
+当下拉刷新的工作完成之后，需要重置下拉刷新的状态：
+```
+$(document.body).pullToRefreshDone();
+```
+
+#####下拉过程
+下拉刷新的整个过程分三步:
+
+1. 当用户正在拖动，并且未到达50px的时候，会在容器上增加一个 pull-down 类
+2. 当用户正在拖动，并且已经达到或者超过50px的时候，会在容器上增加一个 pull-up 类
+3. 当用户拖动超过50px并且释放之后，会在容器上增加一个 refreshing 类
+后续会在用户下拉的三个步骤都触发对应的事件，方便细粒度控制下拉刷新。
+
+#####初始化参数
+注意，这里的初始化参数都是 v1.1.2 才开始支持的。
+
+在初始化的时候有两种方式：可以直接传入一个回调函数，或者传入一个对象
+
+直接传入回调函数，则会在下拉刷新事件触发的时候执行这个回调。和监听 pull-to-refresh 事件是一样的效果，不过写起来更加方便而已。
+```
+$(document.body).pullToRefresh(function () {
+// 下拉刷新触发时执行的操作放这里。
+// 从 v1.1.2 版本才支持回调函数，之前的版本只能通过事件监听
+});
+```
+你还可以选择传入一个对象，会有更多的配置可选：
+```
+$(document.body).pullToRefresh({
+onRefresh: function () { /* 当下拉刷新触发的时候执行的回调 */ },
+onPull: function (percent) { /* 用户下拉过程中会触发，接收一个百分比表示用户下拉的比例 */ },
+distance: 50 /* 下拉刷新的触发距离， 注意，如果你重新定义了这个值，那么你需要重载一部分CSS才可以，请参考下面的自定义样式部分 */
+});
+```
+#####JS 方法
+除了用户手势触发，也可以通过JS方法来触发刷新操作：
+```
+$('xxxx').pullToRefresh('triggerPullToRefresh')
+
+```
+#####自定义样式
+下拉刷新组件提供了灵活的配置，你完全可以根据自己的需求去定义下拉的样式。这里提供一个简单的球形示例可供大家参考。
+
+需要注意的是：
+
+1. 如果你定义了 distance 参数值，那么 相关的CSS也需要被重载，具体方式可以参见右侧demo的源码。下拉刷新的很多逻辑都在CSS中，如果你不熟悉请不要随便修改 distance 以免导致页面的样式错误。
+2. onPull 会在用户滑动的时候不断触发，请不要做复杂的DOM操作以免导致页面卡顿。
+3. onPull 的 percent 是一个百分比的值，如果用户拉动距离超过 distance 那么这个值是会超过 100 的，这是正常的。如果你不希望显示一个大于100的数值请参考右侧demo的做法。
+
+JS 部分代码如下：
+```
+var $circle = $("#circle")
+$(document.body).pullToRefresh({
+  distance: 80,
+  onRefresh: function() {
+    setTimeout(function() {
+      $("#time").text(new Date);
+      $(document.body).pullToRefreshDone();
+    }, 2000);
+  },
+  onPull: function (percent) {
+    if (percent > 100) percent = 100
+    $circle.html(percent);
+    $circle.css('background-image', 'linear-gradient(0deg, #3cc51f ' + percent + '%, #3cc51f ' + percent + '%, transparent 50%, transparent 100%)')
+  }
+});
+```
+
+#####下拉刷新结合TAB
+可以在每一个 .weui-tab_bd-item 都初始化一个独立的下拉刷新：
+```
+<div class="weui-tab">
+  <div class="weui-navbar">
+    <div class="weui-navbar__item weui-navbar__item--on" href="#tab1">
+      选项一
+    </div>
+    <div class="weui-navbar__item" href="#tab2">
+      选项二
+    </div>
+    <div class="weui-navbar__item" href="#tab3">
+      选项三
+    </div>
+  </div>
+  <div class="weui-tab__bd">
+    <div id="tab1" class="weui-tab__bd-item weui-tab__bd-item--active weui-pull-to-refresh">
+      <div class="weui-pull-to-refresh__layer">
+        <div class='weui-pull-to-refresh__arrow'></div>
+        <div class='weui-pull-to-refresh__preloader'></div>
+        <div class="down">下拉刷新</div>
+        <div class="up">释放刷新</div>
+        <div class="refresh">正在刷新</div>
+      </div>
+      <h1 class="doc-head">页面一</h1>
+      <div class="content-padded">
+        ...
+      </div>
+    </div>
+    <div id="tab2" class="weui-tab__bd-item weui-pull-to-refresh">
+      <div class="weui-pull-to-refresh__layer">
+        <div class='weui-pull-to-refresh__arrow'></div>
+        <div class='weui-pull-to-refresh__preloader'></div>
+        <div class="down">下拉刷新</div>
+        <div class="up">释放刷新</div>
+        <div class="refresh">正在刷新</div>
+      </div>
+      <h1 class="doc-head">页面二</h1>
+      <div class="content-padded">
+        ...
+      </div>
+    </div>
+    <div id="tab3" class="weui-tab__bd-item weui-pull-to-refresh">
+      <div class="weui-pull-to-refresh__layer">
+        <div class='weui-pull-to-refresh__arrow'></div>
+        <div class='weui-pull-to-refresh__preloader'></div>
+        <div class="down">下拉刷新</div>
+        <div class="up">释放刷新</div>
+        <div class="refresh">正在刷新</div>
+      </div>
+      <div class="content-padded">
+        <h1 class="doc-head">页面三</h1>
+        ...
+      </div>
+    </div>
+  </div>
+```  
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

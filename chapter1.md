@@ -1,3 +1,1 @@
-# First Chapter
-
-GitBook allows you to organize your book into chapters, each chapter is stored in a separate file like this one.
+# 第三方组件库 [mint-ui](https://mint-ui.github.io)
