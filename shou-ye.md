@@ -28,6 +28,7 @@
 	</div>
 </section> 
 ```
+<br />
 
 
 **滑动板块**
@@ -44,3 +45,53 @@
 	</div>
 </section>
 ```
+<br />
+
+
+**固定板块**
+
+![](http://wonderland123.oss-cn-hangzhou.aliyuncs.com/1ca427fd489c5c23a649e299d36b1a62.jpg)
+
+```
+<section class="fixed-block-big">
+	<div class="item" v-for="n in 2" :key="n">
+		<img class="img" src="../../assets/image/block.jpg">
+		<p class="name">精选产品介绍简介说惆怅长岑长</p>
+		<p class="price">￥123</p>
+	</div>
+</section>
+
+```
+<br />
+
+**固定板块**
+
+![](http://wonderland123.oss-cn-hangzhou.aliyuncs.com/d9c2c223b9ad8b7920a1651d50dec870.jpg)
+
+```
+<section class="fixed-block-normal">
+	<div class="item" v-for="n in 3" :key="n">
+		<img class="img" src="../../assets/image/block.jpg">
+		<p class="name">精选产品介绍简介说惆怅长岑长</p>
+		<p class="price">￥123</p>
+	</div>
+</section>
+```
+<br />
+
+
+**固定板块**
+
+![](http://wonderland123.oss-cn-hangzhou.aliyuncs.com/8c95678c5ab6448b62c1b2decb4f4f60.jpg)
+
+```
+<section class="fixed-block-small">
+	<div class="item" v-for="n in 4" :key="n">
+		<img class="img" src="../../assets/image/block.jpg">
+		<span class="name center">精选产品介绍简介说惆怅长岑长</span>
+		<span class="tip center">标签说明</span>
+	</div>
+</section>
+```
+<br />
+
