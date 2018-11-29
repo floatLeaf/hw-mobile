@@ -4,7 +4,7 @@
 * [布局](bu-ju.md)
   * [rem布局](rembu-ju.md)
   * [规范](gui-fan.md)
-  * [移动端小样式](yi-dong-duan-xiao-yang-shi.md)
+  * [首页](shou-ye.md)
 * [vue常用组件](chapter1.md)
   * [下拉刷新组件](chapter1/xia-la-shua-xin-zu-jian.md)
   * [Message Box](chapter1/message-box.md)
