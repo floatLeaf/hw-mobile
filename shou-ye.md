@@ -95,3 +95,31 @@
 ```
 <br />
 
+
+**产品列表**
+
+![](http://wonderland123.oss-cn-hangzhou.aliyuncs.com/e0b67c4c063dc88fc19d5ff10d830165.jpg)
+
+```
+<section class="production-wrap">
+	<div class="item" v-for="n in 4" :key="n">
+		<img class="item-img" src="../../assets/image/block.jpg">
+		<div class="item-info">
+			<p class="name">精选产品介绍简介说惆怅长岑长精选产品介绍简介说惆怅长岑长三下乡</p>
+			<div class="info">
+				<div class="tags">
+					<span class="tag" v-for="n in 2" :key="n">新品</span>
+				</div>
+				<div class="other-info">
+					<div class="price">
+						<div class="new">￥<span>520</span></div>
+						<del class="old">￥520</del>
+					</div>
+
+					<div>2837人收藏 </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+```
