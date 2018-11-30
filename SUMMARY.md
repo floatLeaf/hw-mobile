@@ -7,6 +7,8 @@
   * [首页](shou-ye.md)
   * [tab页底](tabye-di.md)
   * [商品详情页](shang-pin-xiang-qing-ye.md)
+  * [购物车](gou-wu-che.md)
+  * [小组件](xiao-zu-jian.md)
 * [vue常用组件](chapter1.md)
   * [下拉刷新组件](chapter1/xia-la-shua-xin-zu-jian.md)
   * [Message Box](chapter1/message-box.md)
