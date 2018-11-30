@@ -90,3 +90,32 @@
 	</div>
 </div>
 ```
+
+**表单**
+![](http://wonderland123.oss-cn-hangzhou.aliyuncs.com/b65e3e43f4619c3b518e58aaf1d24c13.jpg)
+
+```
+<div class="form-wrap">
+	<div class="item">
+		<div class="item-name">收货人</div>
+		<div class="item-val">
+			<input type="text" name="" placeholder="请输入内容">
+		</div>
+	</div>
+
+	<div class="item">
+		<div class="item-name">收货人</div>
+		<div class="item-val">
+			<input type="text" name="" placeholder="请输入内容">
+		</div>
+		<div class="arrow"><i class="iconfont">&#xe871;</i></div>
+	</div>
+
+	<div class="item textarea">
+		<div class="item-name">收货人</div>
+		<div class="item-val">
+			<textarea placeholder="请输入内容"></textarea>
+		</div>
+	</div>
+</div>
+````
