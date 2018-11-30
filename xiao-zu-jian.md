@@ -1,3 +1,24 @@
+**数量加减**
+
+![](http://wonderland123.oss-cn-hangzhou.aliyuncs.com/f2811443313c777970f4dd1595bd78cb.jpg)
+
+```
+<!--小尺寸用于购物车-->
+<div class="num-calculate small">
+	<span>-</span>
+	<input type="number">
+	<span>+</span>
+</div>
+
+<!--用于详情页-->
+<div class="num-calculate small">
+	<span>-</span>
+	<input type="number">
+	<span>+</span>
+</div>
+
+```
+
 **活动列表页面**
 ![](http://wonderland123.oss-cn-hangzhou.aliyuncs.com/0276babcfac784b98934a7a68f30e7e1.jpg)
 
